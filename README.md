@@ -16,8 +16,6 @@
 
 ## 1.4. `npm i webpack-merge webpack-dev-server -D` 安装 webpack 合并和调试工具
 
----
-
 # 2.处理 html 资源
 
 ## 2.1 创建 `index.html`
@@ -69,11 +67,11 @@ module: {
 
 ```ts
  // webpack.common.ts
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
-            }
+    {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+    }
 ```
 
 ## 3.2 `tsc --init` 创建 **tsconfig.json**
@@ -226,7 +224,6 @@ export default merge(common, {
     ],
   },
 });
-
 ```
 
 ## 4.6 创建 styles.less
@@ -240,7 +237,6 @@ body {
   margin: auto;
   width: 100px;
 }
-
 ```
 
 # 5.拆分所有 chunks
