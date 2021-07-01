@@ -39,7 +39,7 @@
 
 ## 2.2 `npm i html-webpack-plugin -D` 安装 html 插件
 
-```ts
+```tsx
 // webpack.common.ts
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
@@ -80,7 +80,7 @@ module: {
 
 ## 3.3 创建 app.tsx 文件
 
-```ts
+```tsx
 import React, { useState } from "react";
 import { Button } from "antd";
 import ReactDOM from "react-dom";
@@ -104,7 +104,6 @@ function App() {
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));
-
 ```
 
 # 4. 处理 sass
@@ -169,7 +168,7 @@ export default merge(common, {
   module: {
     rules: [
       {
-        test: /\.((c|sa|sc)ss)$/i,
+        test: /\.css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -177,45 +176,71 @@ export default merge(common, {
               publicPath: "../../",
             },
           },
-          // 将css文件变成commonjs模块加载js中，里面内容是样式字符串
+          "css-loader",
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../../",
+            },
+          },
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+            },
+          },
+          "less-loader",
+        ],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../../",
+            },
+          },
           "css-loader",
           "sass-loader",
+        ],
+      },
+      {
+        test: /\.stylus$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../../",
+            },
+          },
+          "css-loader",
+          "stylus-loader",
         ],
       },
     ],
   },
 });
+
 ```
 
-## 4.6 创建 index.scss
+## 4.6 创建 styles.less
 
 ```scss
-// index.scss
-$body-color: red;
+body {
+  background-color: #d1d1d1;
+}
 
-* {
-  margin: 0;
-  padding: 0;
+.divForm {
+  margin: auto;
+  width: 100px;
 }
-.box {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
-  background-color: $body-color;
-  background: no-repeat url("../img/1.jpg");
-  .content {
-    width: 600px;
-    height: 600px;
-    background-color: pink;
-    img {
-      width: 100px;
-      height: 100px;
-    }
-  }
-}
+
 ```
 
 # 5.拆分所有 chunks
@@ -246,20 +271,20 @@ $body-color: red;
 ```ts
 // webpack.common.ts
 
-            {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
-                generator: {
-                    filename: 'static/images/[hash][ext][query]'
-                }
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                type: 'asset/resource',
-                generator: {
-                    filename: 'static/font/[hash][ext][query]'
-                }
-            },
+    {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+        generator: {
+            filename: 'static/images/[hash][ext][query]'
+        }
+    },
+    {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+        generator: {
+            filename: 'static/font/[hash][ext][query]'
+        }
+    },
 ```
 
 # 8.测试环境配置 **devServer**
@@ -290,7 +315,7 @@ import { CleanWebpackPlugin } from "clean-webpack-plugin";
 
 # 10.修改`package.json`
 
-```
+```json
   "scripts": {
     "test": "webpack --config webpack.dev.js",
     "start": "webpack serve --config webpack.dev.js",
