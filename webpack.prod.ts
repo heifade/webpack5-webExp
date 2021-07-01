@@ -1,9 +1,9 @@
-const { merge } = require("webpack-merge");
-const common = require("./webpack.common.js");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+import { merge } from "webpack-merge";
+import { common } from "./webpack.common";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
 
-module.exports = merge(common, {
+export default merge(common, {
   mode: "production",
   devtool: "source-map",
   plugins: [

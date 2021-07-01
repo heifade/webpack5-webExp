@@ -1,11 +1,12 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+import { resolve } from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import { Configuration } from "webpack";
 
-module.exports = {
-  entry: "./src/main.ts",
+export const common: Configuration = {
+  entry: "./src/index.tsx",
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    path: resolve(__dirname, "dist"),
   },
   plugins: [new HtmlWebpackPlugin({ template: "./index.html" })],
   module: {
