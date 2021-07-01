@@ -6,11 +6,11 @@
 
 ## 1.1 运行`npm init -y` 创建工程
 
-## 1.2.创建 `webpack.common.js` `webpack.dev.js` `webpack.prod.js` 三个 webpack 配置文件
+## 1.2.创建 `webpack.common.ts` `webpack.dev.ts` `webpack.prod.ts` 三个 webpack 配置文件
 
-- `webpack.common.js` 公共配置
-- `webpack.dev.js` 调试环境配置
-- `webpack.prod.js` 生产环境配置
+- `webpack.common.ts` 公共配置
+- `webpack.dev.ts` 调试环境配置
+- `webpack.prod.ts` 生产环境配置
 
 ## 1.3.`npm i webpack webpack-cli -D` 安装 webpack
 
