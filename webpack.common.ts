@@ -3,7 +3,7 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import { Configuration } from "webpack";
 
 export const common: Configuration = {
-  entry: "./src/index.tsx",
+  entry: "./src/app.tsx",
   output: {
     filename: "[name].bundle.js",
     path: resolve(__dirname, "dist"),

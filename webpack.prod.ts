@@ -16,7 +16,7 @@ export default merge(common, {
   module: {
     rules: [
       {
-        test: /\.((c|sa|sc)ss)$/i,
+        test: /\.css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -24,9 +24,51 @@ export default merge(common, {
               publicPath: "../../",
             },
           },
-          // 将css文件变成commonjs模块加载js中，里面内容是样式字符串
+          "css-loader",
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../../",
+            },
+          },
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+            },
+          },
+          "less-loader",
+        ],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../../",
+            },
+          },
           "css-loader",
           "sass-loader",
+        ],
+      },
+      {
+        test: /\.stylus$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../../",
+            },
+          },
+          "css-loader",
+          "stylus-loader",
         ],
       },
     ],

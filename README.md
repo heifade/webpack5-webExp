@@ -78,16 +78,33 @@ module: {
 
 ## 3.2 `tsc --init` 创建 **tsconfig.json**
 
-## 3.3 创建 main.ts 文件
+## 3.3 创建 app.tsx 文件
 
 ```ts
-import { add } from "./assets/js/test";
-import "./assets/font/iconfont.css";
-import "./assets/css/index.scss";
+import React, { useState } from "react";
+import { Button } from "antd";
+import ReactDOM from "react-dom";
+import "antd/dist/antd.css";
 
-add(1, 2).then((res) => {
-  console.log(res, "add");
-});
+function App() {
+  const [count, setCount] = useState<number>(0);
+
+  const onAdd = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <div>count: {count}</div>
+      <Button type="primary" onClick={onAdd}>
+        加1
+      </Button>
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
 ```
 
 # 4. 处理 sass
